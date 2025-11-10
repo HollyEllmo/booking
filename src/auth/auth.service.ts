@@ -14,7 +14,7 @@ export class AuthService {
 
   async sign(email: string, password: string): Promise<string> {
     const prisma: PrismaClient = this.prisma;
-    type DbUser = { id: number; email: string; password: string };
+    type DbUser = { id: string; email: string; password: string };
     const existing: DbUser | null = await prisma.user.findUnique({
       where: { email },
     });
@@ -34,7 +34,7 @@ export class AuthService {
     return this.signToken(existing.id, existing.email);
   }
 
-  private async signToken(userId: number, email: string): Promise<string> {
+  private async signToken(userId: string, email: string): Promise<string> {
     const payload = { sub: userId, email };
     return await this.jwt.signAsync(payload);
   }

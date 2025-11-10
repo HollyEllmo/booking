@@ -11,11 +11,12 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   email     String   @unique
   name      String?
   password  String
   createdAt DateTime @default(now()) @map("created_at")
+  bookings  Booking[]
 
   @@map("users")
 }
@@ -36,6 +37,7 @@ model Booking {
   createdAt  DateTime @default(now()) @map("created_at")
 
   event      Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("bookings")
   @@unique([eventId, userId], map: "bookings_event_user_unique")

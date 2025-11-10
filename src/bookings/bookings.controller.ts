@@ -21,7 +21,7 @@ export class BookingsController {
   @HttpCode(HttpStatus.CREATED)
   async reserve(
     @Body() dto: ReserveDto,
-    @GetUser('userId') userId: number,
+    @GetUser('userId') userId: string,
   ): Promise<{
     id: number;
     event_id: number;
@@ -29,10 +29,7 @@ export class BookingsController {
     created_at: Date;
   }> {
     const { event_id } = dto;
-    const booking = await this.bookingsService.reserve(
-      event_id,
-      String(userId),
-    );
+    const booking = await this.bookingsService.reserve(event_id, userId);
     const response: {
       id: number;
       event_id: number;

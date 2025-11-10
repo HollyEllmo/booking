@@ -1,7 +1,7 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import type { Request } from 'express';
 
-type AuthUser = { userId: number; email: string } & Record<string, unknown>;
+type AuthUser = { userId: string; email: string } & Record<string, unknown>;
 
 interface RequestWithUser extends Request {
   user?: AuthUser;
