@@ -22,7 +22,8 @@
     "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio",
     "db:up": "docker compose up -d",
-    "db:down": "docker compose down -v"
+    "db:down": "docker compose down -v",
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
