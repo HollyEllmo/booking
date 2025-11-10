@@ -8,7 +8,6 @@ import type { Request } from 'express';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     const opts: StrategyOptions = {
-      // Typed custom extractor to avoid unsafe calls on library helpers
       jwtFromRequest: (req: Request): string | null => {
         const header = req.get('authorization');
         if (!header) return null;
@@ -19,7 +18,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       ignoreExpiration: false,
       secretOrKey: process.env.JWT_SECRET ?? 'dev_jwt_secret',
     };
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     super(opts);
   }
 
